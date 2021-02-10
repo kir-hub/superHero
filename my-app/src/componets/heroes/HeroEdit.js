@@ -1,7 +1,6 @@
 import React, {useState} from 'react'
 import * as all from '../../http/api'
 import styles from './styles.module.sass'
-import {Link} from 'react-router-dom'
 import Header from '../Header/Header'
 
 export default function HeroEdit() {
@@ -9,15 +8,11 @@ export default function HeroEdit() {
     const [nickname, setNickname] = useState('')
     const [realName, setRealName] = useState('')
     const [originDescription, setOriginDescription] = useState('')
-    
     const [superpowers, setSuperpowers] = useState('')
     const [catchPhrase, setCatchPhrase] = useState('')
     const [images, setImage] = useState('png')
     const [id, setId] = useState('')
     
-
-
-
     const editHero = async()=>{
         const formData = new FormData()
         formData.append('nickname', nickname)
@@ -27,9 +22,7 @@ export default function HeroEdit() {
         formData.append('catch_phrase', catchPhrase)
         formData.append('images', images)
         formData.append('id', id)
-
         await all.editHero(formData)
-
         setNickname(() => '')
         setRealName(() => '')
         setOriginDescription(() => '')
@@ -39,14 +32,12 @@ export default function HeroEdit() {
         
     }
 
-
     const selectFile = e =>{
         setImage(e.target.files[0]);
         
     }
 
     return (
-
 <>
     <Header/>
         <div className={styles.main}>

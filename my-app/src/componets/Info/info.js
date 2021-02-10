@@ -1,4 +1,4 @@
-import React,{useState, useEffect, useMemo} from 'react'
+import React,{useState, useEffect} from 'react'
 import {getOneHero} from '../../http/api'
 import ACTION from '../../actions/action'
 import {connect} from 'react-redux'
@@ -14,7 +14,6 @@ function Info(props) {
     } = props
     
     const [heroInfo, setHeroInfo] = useState('')
-
 
 
     const fetchOneHero = async()=>{
@@ -36,7 +35,7 @@ function Info(props) {
     }
     
     return (
-        <div className={styles.main} onMouseMove={fetchOneHero()}>
+        <div className={styles.main} onMouseMove={fetchOneHero}>
             
             <img src={process.env.REACT_APP_API_URL + heroInfo.images} alt='pic'/>
             

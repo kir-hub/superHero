@@ -13,16 +13,10 @@ function ListItem(props) {
     const {
         id,
         nickname,
-        real_name,
-        origin_description,
-        superpowers,
-        catch_phrase,
         images,
         deleteHero,
         showHero,
         opposite,
-        trueOrFalse,
-
     } = props
 
     const deleteHandler = ()=>{
@@ -31,8 +25,7 @@ function ListItem(props) {
     
     const handler = ()=>{
         showHero(id)
-
-         opposite()
+        opposite()
         
     }
     
@@ -43,12 +36,7 @@ function ListItem(props) {
                 <button onClick={handler}>?</button> 
                 <h2 >{nickname}</h2>  
             </div>
-            
-
             <img src={src + images} alt='pic'/>
-            
-            
-
         </div>
     )
 }

@@ -6,11 +6,9 @@ import Info from '../Info/info'
 import ACTION from '../../actions/action'
 import Pagination from '../pagination/Pagination'
 import styles from './List.styles.module.sass'
-import {Link} from 'react-router-dom'
 import Header from '../Header/Header'
 
 function List(props) {
-
 
     const [list, setList] = useState([])
     const [picked, setPicked] = useState([])
@@ -19,7 +17,6 @@ function List(props) {
     const fetchHeroes = async()=>{
         try {
             const newHeroes = await all.getAllHeroes()
-            console.log(newHeroes.data.rows);
             setList(()=> [...list, ...newHeroes.data.rows])
             setPicked(() => [...picked, ...newHeroes.data.rows])
         } catch (error) {
@@ -30,17 +27,12 @@ function List(props) {
     const deleteHero = (id)=>{
         setList(()=> list.filter((item) => item.id !== id))
     }
-
-    console.log(list);
     
     const showHero = (id) =>{
         setPicked(() => list.filter((item) => item.id == id))
         setIdentificator(()=> picked[0].id)
     }
 
-    console.log(picked);
-    console.log(identificator);
-   
 
     const mapHeroes = () =>{
         return currentHeroes.map((item) => (
@@ -48,7 +40,7 @@ function List(props) {
         ))
     }
  
-    const {trueOrFalse, opposite} = props
+    const {trueOrFalse} = props
 
     useEffect(() => {
         fetchHeroes()
@@ -57,7 +49,6 @@ function List(props) {
 
     const [currentPage, setCurrentPage] = useState(1);
     const [heroesPerPage, setHeroesPerPage] = useState(5);
-
     const indexOfLastHero = currentPage * heroesPerPage;
     const indexOfFirstHero = indexOfLastHero - heroesPerPage;
     const currentHeroes = list.slice(indexOfFirstHero, indexOfLastHero);
@@ -65,18 +56,14 @@ function List(props) {
     const paginate = (pageNumber)=>{
         setCurrentPage(pageNumber)
     }
-
     
 
     return ( 
         
         <>
-        
-        {trueOrFalse ? <div className={styles.main}>
+        {trueOrFalse ? <div  className={styles.main}>
             <Header/>
             <ul><Pagination heroesPerPage={heroesPerPage} totalHeroes={list.length}  paginate={paginate}/></ul>
-            
-            
             <ul className={styles.dispalayList}>{mapHeroes()}</ul>
             <ul><Pagination heroesPerPage={heroesPerPage} totalHeroes={list.length}  paginate={paginate}/></ul>
         </div> : <Info id={identificator} showHero={showHero}/>}

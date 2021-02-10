@@ -1,5 +1,4 @@
 import React, {useState} from 'react'
-import { Link } from 'react-router-dom'
 import * as all from '../../http/api'
 import Header from '../Header/Header'
 import styles from './styles.module.sass'
@@ -9,14 +8,10 @@ export default function Hero() {
     const [nickname, setNickname] = useState('')
     const [realName, setRealName] = useState('')
     const [originDescription, setOriginDescription] = useState('')
-    
     const [superpowers, setSuperpowers] = useState('')
     const [catchPhrase, setCatchPhrase] = useState('')
     const [images, setImage] = useState('png')
     
-
-
-
     const addHero1 = async()=>{
         const formData = new FormData()
         formData.append('nickname', nickname)
@@ -26,18 +21,14 @@ export default function Hero() {
         formData.append('catch_phrase', catchPhrase)
         formData.append('images', images)
         await all.createHero(formData)
-        
         setNickname(() => '')
         setRealName(() => '')
         setOriginDescription(() => '')
         setSuperpowers(() => '')
         setCatchPhrase(() => '')
-        setImage(() => '')
-        
-        
+        setImage(() => '') 
 
     }
-
 
     const selectFile = e =>{
         setImage(e.target.files[0]);
